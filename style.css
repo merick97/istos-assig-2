@@ -1,0 +1,694 @@
+/*Importng custom fonts*/
+  @font-face {
+    font-family: Roboto;
+    src: url('../fonts/Roboto-Regular.ttf');
+  } 
+  @font-face {
+    font-family: Ubuntu Mono;
+    src: url('../fonts/UbuntuMono-Regular.ttf');
+  } 
+  @font-face {
+    font-family: Advent Pro;
+    src: url('../fonts/AdventPro-Regular.ttf');
+  }
+
+/*Style rules that affect the whole page*/
+  html {
+    scroll-behavior: smooth; /*Smooth navigation (ex: product-categories.html when choosing a category)*/
+  }
+
+/*Main Body Style rules*/
+  body {    /*changes background color, font and font color for the main body*/
+    background-color: #CDDDDD;
+    font-family: 'Roboto', sans-serif;
+    color: #051014;
+    margin: 0px;
+  }
+
+/*Page Title(h1) style rules*/
+  h1 {    /*changes font, font size and the spacing for the main tiles (h1)*/
+    font-family: 'Advent Pro', sans-serif;
+    border-bottom: #051014 solid 2px;
+    font-size: 30px;
+    margin-top: 0px;
+    margin-bottom: 1px;
+  }
+
+/*hr style rules*/
+  hr {    /*changes the spacing and the border for the hr tag*/
+    border-bottom: 1px solid #051014;
+    margin: 0px;
+    padding:0px;
+    border-radius: 5px;
+  }
+
+/*abbr style rules*/
+  abbr{   /*removes the underline from the abbreviation tag*/
+    text-decoration: none;
+  }
+
+
+/*return to previous page link style rules (ex: prod-ryzen5600 line 26)*/
+  #return{    /*changes the color and removes the underline from the return links*/
+    text-decoration: none;
+    color: #051014;
+  }
+
+  #return::before {   /*adds a custom icon before the link */
+    content: url(../images/return.png);
+    zoom: 3%;
+  }
+
+  #return:hover {   /*adds an underline while hovering over the text*/
+    text-decoration: underline;
+  }
+
+/*Grid Container*/
+  .grid {   /*creates a grid for the whole page*/
+    display: grid;
+    grid-template-columns: 1fr;  /*1 column*/
+    grid-template-rows: auto 1fr auto;  /*2 rows*/
+    grid-column-gap: 0px; /*no gap between columns*/
+    grid-row-gap: 0px;  /*no gap between rows*/
+    padding: 0px; /*spacing (sets padding to 0)*/
+  }
+
+  /*Page's main content*/
+  main {
+    grid-area: 2 / 1 / 3 / 3;   /*Second row of the main grid (.grid)*/
+    margin: auto;
+  }
+
+/* Website Header style rules*/
+
+  /* Header Image-Logo rules*/
+    header {
+      grid-area: 1 / 1 / 2 / 3; /*First row of the main grid (.grid)*/
+    }
+
+    header img {    /*spacing and sizing declarations for the header image*/
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        max-width: 100%;
+        height: auto;
+    }
+
+  /* Main Navigatiton Menu */
+
+    header nav {  /*lets the browser calculate the width of the navigation bar*/
+      width: auto ;
+      margin-bottom: 0px;
+    }
+
+    header nav ul{    /*sapcing, changes the color of the bar and centers the text in a row using flexbox*/
+      padding-left: 0px;
+      background-color: #ACBDBA;
+      text-align: center;
+      display: flex;
+      flex-flow: row nowrap;    /*displays list items in a row without wraping them when the window size changes*/
+      justify-content: center;  /*centers the list items*/
+      list-style: none;
+    }
+
+    header nav li {   /*displays list itmes inline(side by side), spacing and font change*/
+      padding: 10px 20px;
+      font-family: 'Ubuntu Mono', monospace;
+    }
+    
+    header nav li:hover {   /*changes the color of the list item while hovering*/
+      background-color: #6E62E2;
+    }
+
+    header nav  li a {    /*changes font color and size for the link text and removes the underline*/
+      color: #051014;
+      text-decoration: none;
+      font-size: larger;
+    }
+    
+    header nav  li:hover a {    /*chaneges the font color of the links while hovering*/
+      color: #ACBDBA;
+    }
+
+    /*Media querie to make menu display in a column instead of a row*/
+    @media screen and (max-width: 600px) {
+      header nav ul{
+        flex-flow: column nowrap;
+      }
+    }
+
+
+/*Center Page*/
+  .pageCenter {   /*centers a div on the center of the page. Used to center all the pages)*/
+    max-width: 600px;
+    margin: auto;
+  }
+/*Creates a grid for the main content of the index page*/
+  .index-grid{
+    display: grid;
+    grid-template-columns: 1fr;  /*1 column*/
+    grid-template-rows: auto 1fr 1fr;  /*2 rows*/
+    grid-column-gap: 0px; /*no gap between columns*/
+    grid-row-gap: 0px;  /*no gap between rows*/
+    padding: 0px; /*spacing (sets padding to 0)*/
+  }
+
+  .index-grid div[class=center]:nth-of-type(1) {    /*First row of the index grid (.index-grid)*/
+    grid-area: 1 / 1 / 2 / 2;
+  }
+
+  .index-grid div[class=center]:nth-of-type(2) {    /*Second row of the index grid (.index-grid)*/
+    grid-area: 2 / 1 / 3 / 2;
+  }
+
+  .index-grid div[class=center]:nth-of-type(3) {    /*Third row of the index grid (.index-grid)*/
+    grid-area: 3 / 1 / 4 / 2;
+  }
+
+/*Centers*/
+  .center {   /*centers text and elements using flexbox*/
+    padding-top: 5px;
+    margin-right: auto;
+    margin-left: auto;
+    display: flex;
+    flex-flow: row wrap;    /*displays items in a row and wraping them when the window size changes*/
+    justify-content: center;    /*centers items*/
+  }
+  .center img {  /* Centers a single image or group of images inline with eachother*/
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 100%;
+    height: auto;
+  }
+    /*Media querie to make products display in a column instead of a row*/
+    @media screen and (max-width: 600px) {
+      .center{
+        flex-flow: column wrap;
+      }
+    }
+/*Product Info Style rules*/
+  .details > img {    /*spacing and backround color declarations for images where the parent has the .details class */
+    display: block;
+    margin: 10px auto 5px auto;
+    padding: 5px 90px 5px 90px;
+    border-radius: 25px;
+    width: 50%;   /*changes size to 50% of the original*/
+    background-color: #e8f0f0;
+  }
+
+  /*product code*/
+  .details > p:nth-of-type(1) {   /*changes font color and size for the first p element where the parent has the .details class*/
+    color: rgb(134, 133, 133);
+    font-size: 10px;
+  }
+
+  /*product price*/
+  .details > p:nth-of-type(3) {   /*changes font color and size for the third p element where the parent has the .details class*/
+    color: gray;
+    font-size: 22px;
+  }
+
+  .details h3, .details h4 {    /*changes the font and the font size for the h3,h4 tags*/
+    font-family: 'Advent Pro', sans-serif;
+    font-size: 20px;
+  }
+
+  .details article {    /*changes font, font color. Adds a border, backround color and spacing*/
+   color: #051014;
+   font-family: 'Segoe UI', Tahoma, Verdana, sans-serif;
+   border-radius: 5px;
+   background-color: #ACBDBA;
+   padding: 10px;
+  }
+
+  .details article p {    /*spacing rules for the p tag*/
+    padding: 0;
+    margin: 0;
+  }
+
+  .details article img {    /*floats article images to the right and changes their size and spacing*/
+    float: right;
+    width: 250px;
+    max-width: 100%;
+    height: auto;
+    padding: 0;
+  }
+
+
+  .details table {    /*changes font and size of tables*/
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;    /*changes the border style of the table*/
+    width: 100%;
+  }
+  
+  .details table td, .details table th {    /*chages the border size, colr and spacing for the data and heading cells of the table*/
+    border: 5px solid #ACBDBA;
+    padding: 8px;
+  }
+  
+  
+  .details table tr:nth-child(odd) {    /*chanegs the color of half of the rows*/
+    background-color: white;
+  }
+  
+  .details table tr:hover {   /*changes row color while hovering*/
+    background-color: lightgrey;
+  }
+  
+  .details table th {   /*spacing, sets the text to the left, changes backround and font color for all the header*/
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color:#6E62E2;
+    color:#CDDDDD;
+  }
+
+  .details table td {   /*sets the text to the left for all data cells*/
+    text-align: right;
+  }
+
+  .details table a {    /*changes font color and removes the underline for all links in the table*/
+    color: #6E62E2;
+    text-decoration: none;
+  }
+
+  /*Product Info Style rules*/
+    .review h3 {
+      border-bottom: 1px solid #051014;
+    }
+
+    .review > p:nth-of-type(1) {    /*changes font size and the spacing for the first p element where the parent has the .review class*/
+      font-size: 20px;
+      margin-bottom: 0;
+    }
+
+    .review > p:nth-of-type(2) {  /*changes the spacing, font color and size for the first p element where the parent has the .review class*/
+      color:#6E62E2; 
+      font-size: 30px; 
+      margin: 0;
+    }
+
+    .review fieldset {    /*spacing, changes font, add border and bakcround color for the fieldset section*/
+      margin-bottom: 10px;
+      font-family:'Segoe UI', Tahoma, Verdana, sans-serif;
+      border-radius: 25px;
+      background-color: #e8f0f0;
+    }
+
+    .review fieldset legend {   /*spacing, changes font, font size and weight for the legend tag*/
+      font-family:Verdana, Geneva, Tahoma, sans-serif;
+      font-size: 13px;
+      font-weight: bold;
+      padding-bottom: 12px;
+    }
+
+
+/*Product Categories Style rules*/
+    /*Product Categories Grid*/
+      .category-grid {
+        display: grid;
+        grid-template-columns: 1fr;  /*1 column*/
+        grid-template-rows: 2% 1fr max-content;  /*2 rows*/
+        grid-column-gap: 0px; /*no gap between columns*/
+        grid-row-gap: 0px;  /*no gap between rows*/
+        padding: 0px; /*spacing (sets padding to 0)*/
+        max-width: 600px;
+      }
+
+      .category-grid h1 {   /*First row of the category grid (.category-grid)*/
+        grid-area: 1 / 1 / 2 / 2;
+      }
+
+      .category-grid nav {    /*Second row of the category grid (.category-grid)*/
+        grid-area: 2 / 1 / 3 / 2;
+      }
+
+      .category-grid div[class=category-flex]{    /*Third row of the category grid (.category-grid)*/
+        grid-area: 3 / 1 / 4 / 2;
+      }
+
+  /*Product Categorie Flexbox*/
+      .category-flex{
+        margin-top: 0px;
+        display: flex;
+        flex-flow: column nowrap;    /*displays list items in a row and wraping them when the window size changes*/
+        justify-content:center;    /*centers the list items*/
+        align-content: space-between;
+      }
+
+      
+  /*Category navigation style rules*/
+    #nav-prod {   /*spacing, lets the browser calculate the width of the navigation bar*/
+      margin-top: 20px;
+      width: auto ;
+      margin-top: 7px;
+    }
+
+  
+    #nav-prod ul{   /*spacing, aligns text and elements to the center*/
+      padding-left: 0px;
+      text-align: center;
+      margin: 0px;
+    }
+  
+    #nav-prod li {    /*spacing, displays list itmes inline, changes font and backround color*/
+      display: inline-block;
+      padding-bottom: 5px;
+      font-family: 'Ubuntu Mono', monospace;
+      background-color: #051014;
+      margin-bottom: 5px;
+      width: 30%;
+    }
+
+    #nav-prod li a{   /*changes link font color*/
+      color: #CDDDDD;
+    }
+
+    #nav-prod a:link, #nav-prod a:visited{    /*for links and visited links changes: spacing, font and backround color, displays links inline*/
+    color: #CDDDDD;
+    background-color: #051014;
+    text-align: center;
+    padding: 20px 15px;
+    text-decoration: none;
+    display: inline-block;
+  }
+
+  #nav-prod a:hover {   /*changes font color while hovering*/
+    color: #6E62E2;
+  }
+
+  /*Media querie to maket teh product  menu display in a column instead of a row*/
+  @media screen and (max-width: 600px) {
+    #nav-prod ul{
+      text-align: center;
+    }
+    #nav-prod li{
+      width: auto;
+      display: block;
+    }
+  }
+
+  /*category list style rules*/
+    .category {   /*creates a box for the categories*/
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);   /*adds shadow to the box*/
+      border-radius: 5px;   /*rounds the corners of the box*/
+      padding-left: 10px;   /*spacing*/
+      padding-right: 10px;
+      padding-bottom: 5px;
+      background-color: #e8f0f0;  /*bakcround color change*/
+      text-align: center;   /*alings text to the center*/
+      margin-bottom: 10px;
+    }
+
+    .category h3 {    /*spacing, changes font size and weight for h3 tag*/
+      padding-top: 5px;
+      font-size: large;
+      font-weight: bold;
+    }
+
+    .category ul{   /*spacing, changes the backround color, aligns the text to center, rounds the cornerns of the list*/
+      padding-left: 0px;
+      background-color: #ACBDBA;
+      text-align: center;
+      border-radius: 10px;
+    }
+
+    .category li {    /*spacing, displays list itmes as blocks changes font size and the cursor look into a pointer*/
+      display: block;
+      padding: 10px 20px;
+      font-size: 17px;
+      cursor: pointer;
+    }
+    
+    .category li:hover {    /*changes backround color and and rounds corners of list itmes while hovering*/
+      background-color: #6E62E2;
+      border-radius: 10px;
+    }
+
+    .category  li a {   /*spacing, changes font color and removes underline for links*/
+      color: #051014;
+      text-decoration: none;
+      padding: 10px 20px;
+    }
+    
+    .category li:hover a,.category li:hover{   /*changes backround and font color while hovering over list itmes and links*/
+      background-color: #051014;
+      color: #CDDDDD;
+    }
+
+    .category img {   /*sets image size to the 50% of the original*/
+      width: 50%;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+  /*Product Card Style rules*/
+    .pCard{   /*creates a box for the products*/
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);   /*adds a shadow around the box*/
+      border-radius: 5px;   /*rounds the corners of the box*/
+      padding-left: 10px;   /*spacing*/
+      padding-right: 10px;
+      padding-bottom: 10px;
+      margin: 5px;
+      background-color: #e8f0f0;    /*changes backround color of the box*/
+      max-width: 250px;   /*max widht and height for the box*/
+      max-height: 530px;
+      text-align: center;   /*centers text and elemnts to the center*/
+      overflow: auto;   /*adds a scrollbar to the box in case of elements overflowing outside the box*/
+      display: flex;
+      flex-flow: column nowrap;    /*displays list items in a row and wraping them when the window size changes*/
+      justify-content:center;    /*centers the list items*/
+    }
+
+    .pCard img {    /*spacing, sets image size to the 50% of the original*/
+      margin-top: 10px;
+      width: 50%;
+    }
+
+    .pCard a {    /*spacing, changes font and backround color, removes underline for links*/
+      color: #CDDDDD;
+      background-color: #051014;
+      text-decoration: none;
+      padding: 10px;
+      margin: 5px;
+    }
+    
+    .pCard a:hover {    /*changes font color of links while hovering*/
+      color:#6E62E2;
+    }
+
+    .pCard p{
+      margin: 5px;
+    }
+
+    /*Product code*/
+    .pCard p:nth-of-type(1) {   /*changes font color and size for the first p element inside a section with the .pCard class*/
+      color: rgb(134, 133, 133);
+      font-size: 10px;
+    }
+
+    /*Product Price*/
+    .pCard p:nth-of-type(3) {   /*changes font color and size for the third p element inside a section with the .pCard class*/
+      color: gray;
+      font-size: 22px;
+    }
+
+    /*Product Rating*/
+    .pCard p:nth-of-type(4) {   /*changes font color and size for the fourth p element inside a section with the .pCard class*/
+      color:#6E62E2;
+      font-size: 25px;
+      position: relative;
+    }
+
+
+/*Team Member div style rules*/
+  .member {   /*creates a box for the team member*/
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);   /*adds shadow around the box*/
+    border-radius: 5px;   /*rounds the corners of the box*/
+    background-color: #e8f0f0;    /*changes backround color of the box*/
+    max-width: 300px;   /*sets max width of th box*/
+    margin-right: 5px;   /*Spacing*/
+    margin-left: 5px;
+    text-align: center;   /*alings text and elements to the center*/
+    font-family: arial;   /*changes font*/
+  }
+
+  .member p {   /*changes font color and size of the p tag*/
+    color: grey;
+    font-size: 18px;
+  } 
+
+/*Forms*/
+  .form{    /*creates a box for the contact form*/
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);   /*adds shadow around the box*/
+    border-radius: 5px;   /*rounds the corner of the box*/
+    background-color: #f0eeee;    /*changes the backround color*/
+    padding: 20px;    /*spacing*/
+    font-family: Roboto;
+  }
+
+  .form label{
+    margin-bottom: 5px;
+    font-family: 'Segoe UI', Tahoma, Verdana, sans-serif;
+  }
+
+  .form p{
+    margin-top: 0px;
+    margin-bottom: 5px;
+    padding: 10px;
+    font-family: 'Segoe UI', Tahoma, Verdana, sans-serif;
+    border-bottom: #051014 solid 1px;
+    background-color: lightgray;
+    border-radius: 10px;
+  }
+
+  .form fieldset {
+    border-radius: 5px;
+  }
+
+  .form fieldset legend{
+    font-family: 'Advent Pro', sans-serif;
+    font-weight: bold;
+  }
+
+  .form input:not([type=submit]):not([type="radio"]),.form textarea, .form select {   /*Style rules for textarea tag and all the inputs except the submit button */
+    width: 100%;    /*extends the width to the max of the form box*/
+    padding: 10px 20px;   /*spacing*/
+    margin: 8px 0;
+    border: 1px solid #ACBDBA;  /*adds a solid border with color*/
+    border-radius: 4px;   /*rounds corners*/
+    box-sizing: border-box; /*includes padding and border in the width and height*/
+  }
+
+  .form input[type=submit] {    /*Style rules for the submit button*/
+    width: 100%; /*extends the width to the max of the form box*/
+    background-color:#6E62E2; /*changes backround color*/
+    color: white;   /*changes font color*/
+    padding: 15px 20px;   /*spacing*/
+    margin: 10px 0;
+    border: none;   /*removes the default border*/
+    border-radius: 4px;   /*rounds corners*/
+    cursor: pointer;    /*changes pointer into a pointer one*/
+  }
+
+  .form input[type=submit]:hover {    /*changes buttons backround color while hovering*/
+    background-color:#3a337e;
+  }
+
+  .form legend {    /*spacing, changes font color of the legend tag*/
+    color:#051014;
+    padding: 5px 10px;
+  }
+
+  .card {
+    display: none;
+  }
+  .paypal {
+    display: none;
+  }
+
+  .new_address {
+    display: none;
+  }
+
+  .payment input[id="card"]:checked ~ .card {
+    display: block;
+  }
+
+  .payment input[id="Paypal"]:checked ~ .paypal {
+    display: block;
+  }
+
+  input[id="ano"]:checked ~ .new_address {
+    display: block;
+  }
+
+  .radios{
+    padding: 10px;
+    border-radius: 10px;
+    background-color: white;
+    margin: 10px;
+  }
+/* Footer */
+  footer {    /*creates the footer area*/
+    text-align: center;   /*aligns text and elemnts to the center*/
+    margin-top: 25px;   /*spacing*/
+    padding-top: 3px;
+    padding-bottom: 10px;
+    background-color: #2E2F2F;    /*changes backround color*/
+    color:#ACBDBA;    /*changes font color*/
+    grid-area: 3 / 1 / 4 / 3;   /*Third row of the main grid (.grid)*/
+  }
+
+  footer h4{    /*changes font, font style and thickness, spacing for the h4 title tag*/
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-style: italic;
+    font-weight: 450;
+    margin-bottom: 0px;
+  }
+
+  footer ul{    /*spacing for the contact info list*/
+    margin-top: 10px;
+    margin-bottom: 15px;
+    padding: 0px;
+  }
+
+  footer ul li{   /*displays list items inline, spacing*/
+    display: inline-block;
+    padding-right: 5px;
+  }
+
+  /*Adds custom icons for the social media list*/
+
+  /*Facebook*/
+  footer ul  #fb a:before{    /*id for social media list(facebook) items*/
+    content: url(../images/fb.png);   /*adds custom image*/
+    zoom: 60%;    /*sets its size to 60% of the original*/
+  }
+
+  footer ul  #fb a:hover::before{   /*changes the above image while hoverign*/
+    content: url(../images/fb_v.png);
+    zoom: 60%;
+  }
+
+  /*Below we have the same procedures for instagram and twitter*/
+
+  /*Instagram*/
+  footer ul  #insta a:before{
+    content: url(../images/insta.png);
+    zoom: 60%;
+  }
+
+  footer ul  #insta a:hover::before{
+    content: url(../images/insta_v.png);
+    zoom: 60%;
+  }
+
+  /*Twitter*/
+  footer ul  #twit a:before{
+    content: url(../images/twitter.png);
+    zoom: 60%;
+  }
+
+  footer ul  #twit a:hover::before{
+    content: url(../images/twitter_v.png);
+    zoom: 60%;
+  }
+
+
+  /*
+  footer a:link, footer a:visited{
+    background-color: #CDDDDD;
+    color: #051014;
+    padding: 10px 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+  }
+
+  footer a:hover, footer a:active {
+    background-color: #051014;
+    color: #CDDDDD;
+  }
+
+*/
