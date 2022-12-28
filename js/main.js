@@ -7,7 +7,6 @@ let init = {
 }
 let _categories;
 let _subcategories = [];
-let _products = [];
 fetch("https://wiki-shop.onrender.com/categories", init)
 .then(response => response.json()
 .then(categories => {
@@ -30,17 +29,7 @@ for(let i=0; i<3; i++){
     } ))
 }
 
-for(let i=0; i<3; i++){
-    fetch(`https://wiki-shop.onrender.com/categories/${i+1}/products`, init)
-    .then(response => response.json()
-    .then(products => {
-        _products[i] = products;
-        console.log(`Product ${i+1} Received`, products)
-    })
-    .catch(error => {
-        console.log(error)
-    } ))
-}
+
 
 var templates = {}
 templates.categories = Handlebars.compile(`
@@ -56,4 +45,4 @@ setTimeout(function (){
     let content = templates.categories(_categories)
     let div = document.querySelector("#contact")
     div.innerHTML = content;
-},1000)
+},500)

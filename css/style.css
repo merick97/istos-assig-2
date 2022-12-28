@@ -440,6 +440,7 @@
       width: 50%;
       margin-left: auto;
       margin-right: auto;
+      mix-blend-mode: multiply;
     }
 
   /*Product Card Style rules*/
@@ -454,7 +455,7 @@
       max-width: 250px;   /*max widht and height for the box*/
       max-height: 530px;
       text-align: center;   /*centers text and elemnts to the center*/
-      overflow: auto;   /*adds a scrollbar to the box in case of elements overflowing outside the box*/
+      /*overflow: auto;   /*adds a scrollbar to the box in case of elements overflowing outside the box*/
       display: flex;
       flex-flow: column nowrap;    /*displays list items in a row and wraping them when the window size changes*/
       justify-content:center;    /*centers the list items*/
@@ -462,7 +463,8 @@
 
     .pCard img {    /*spacing, sets image size to the 50% of the original*/
       margin-top: 10px;
-      width: 50%;
+      width: 70%;
+      mix-blend-mode: multiply;
     }
 
     .pCard a {    /*spacing, changes font and backround color, removes underline for links*/
@@ -479,6 +481,9 @@
 
     .pCard p{
       margin: 5px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
 
     /*Product code*/
