@@ -6,7 +6,6 @@ let init = {
     headers: myHeaders
 }
 let _categories;
-let _subcategories = [];
 fetch("https://wiki-shop.onrender.com/categories", init)
 .then(response => response.json()
 .then(categories => {
@@ -17,17 +16,7 @@ fetch("https://wiki-shop.onrender.com/categories", init)
     console.log(error)
 } ))
 
-for(let i=0; i<3; i++){
-    fetch(`https://wiki-shop.onrender.com/categories/${i+1}/subcategories`, init)
-    .then(response => response.json()
-    .then(subcategories => {
-        _subcategories[i] = subcategories;
-        console.log(`Subategory ${i+1} Received`, subcategories)
-    })
-    .catch(error => {
-        console.log(error)
-    } ))
-}
+
 
 
 
