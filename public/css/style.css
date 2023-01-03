@@ -467,7 +467,7 @@
       mix-blend-mode: multiply;
     }
 
-    .pCard a {    /*spacing, changes font and backround color, removes underline for links*/
+    .pCard a, .pCard button {    /*spacing, changes font and backround color, removes underline for links*/
       color: #CDDDDD;
       background-color: #051014;
       text-decoration: none;
@@ -475,8 +475,9 @@
       margin: 5px;
     }
     
-    .pCard a:hover {    /*changes font color of links while hovering*/
+    .pCard a:hover, .pCard button:hover {    /*changes font color of links while hovering*/
       color:#6E62E2;
+      cursor: pointer;
     }
 
     .pCard p{
@@ -689,4 +690,23 @@
   border-radius: 5px;  
   border-style: dotted;
   border-width: 1px;
+}
+
+#login {
+  float: right;
+  margin-right: 1em;
+  padding: 0px 20px 20px 20px;
+  max-width: 250px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); 
+  border-radius: 5px;  
+  border-style: dotted;
+  border-width: 1px;
+}
+
+#ok {
+  color: green;
+}
+
+#fail {
+  color: red;
 }

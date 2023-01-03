@@ -13,18 +13,20 @@
     <div>
         <header>
             <img style="max-width: 40%;" src="images/header.png" alt = "Header"> 			
-            <nav>
-                <ul>
-                    <li><a href="index.html">Αρχική</a></li>
-                    <li><a href="product-categories.html">Προιόντα</a></li>
-                    <li><a href="contact-us.html">Επικοινωνία</a></li>
-                    <li><a href="about-us.html">Σχετικά Με Εμάς</a></li>
-                    <li><a href="signup.html">Εγγραφή</a></li>
-                </ul>
-            </nav>
+
         </header>
         <main>
             <div id="filter"></div>
+            <div id="login">
+                <form id="loginForm">
+                    <label for="username">Username:</label><br>
+                    <input type="text" id="username" name="username"><br>
+                    <label for="password">Password:</label><br>
+                    <input type="password" id="password" name="password"><br>
+                    <button type="submit">Login</button>
+                </form>
+                <div id="loginmessage"></div>
+            </div>
             <div class="pageCenter">
                 <div id="output"></div>
                 <div id="subcat" class="center"></div>
