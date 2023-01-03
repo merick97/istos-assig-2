@@ -23,6 +23,11 @@ const { v4: uuidv4 } = require('uuid');
 
 
 
+  async function isValidated(username,sessionId){
+    let valid = await db.collection('users').find({username:username, sessionId:sessionId}).hasNext()
+    return await valid
+  }
+
 
 /* 
     Serve static content from directory "public",
@@ -78,20 +83,19 @@ app.post('/login', (req, res) => {
 
   app.post('/add', (req, res) => {
     const {product, username, sessionId} = req.body
-    console.log(product,username)
 
       async function addCart(product, username, sessionId){
-        let authId;
-        await db.collection('users').find({username:username}).forEach(user => authId = user.sessionId)
-        if (sessionId == authId){
+        if (isValidated(username,sessionId)){
           if(await db.collection('cart').find({username:username}).hasNext()){
-              if(await db.collection('cart').find({"products.id":product.id}).hasNext()){
+              if(await db.collection('cart').find({username:username,"products.id":product.id}).hasNext()){
                 await db.collection('cart').updateOne({username:username,"products.id":product.id},{$inc: {"products.$.size":1}})
               }else{
+                console.log("in2")
                 await db.collection('cart').updateOne({username:username}, {$push: {"products":product}})
                 await db.collection('cart').updateOne({username:username, "products.id":product.id}, {$set: {"products.$.size":1}})
             } 
             }else{
+              console.log("in3")
                 await db.collection('cart').insertOne({username:username, products:[]})
                 await db.collection('cart').updateOne({username:username}, {$push: {"products":product}})
                 await db.collection('cart').updateOne({username:username, "products.id":product.id}, {$set: {"products.$.size":1}})
@@ -104,3 +108,47 @@ app.post('/login', (req, res) => {
     addCart(JSON.parse(product), username, sessionId)
   });
   
+app.post('/shoping-cart/size',(req,res) => {
+  const {username, sessionId} = req.body
+  if(isValidated(username,sessionId)){
+    let size = 0
+    db.collection('cart').aggregate([
+      {
+         $match: { username:username }
+      },
+      {
+         $group: { _id: "$products.size"} 
+      }
+   ]).toArray((err, result)=>{
+      //console.log(result[0]._id)
+      res.send(result[0]._id)
+   })
+  }
+})
+
+app.post('/shoping-cart',(req,res) => {
+  let totalCost  = 0;
+  const {username, sessionId} = req.body
+  isValidated(username,sessionId).then((valid)=>{
+    console.log(valid)
+    if(valid){
+      db.collection('cart').findOne({ username:username }, function(err, cart) {
+        if (err) throw err;
+  
+        // Create an array of objects with size and cost properties for each product in the cart
+        const cartItems = cart.products.map(product => ({ title:product.title, size: product.size, cost: product.cost }));
+        for(let i of cartItems){
+          totalCost += i.cost;
+        }
+        let productInfo = [{
+          cartItems:cartItems,
+          totalCost:totalCost
+        }]
+  
+        // Send the cartItems array as a response
+        res.send({ productInfo });
+      });
+    }
+  })
+
+})

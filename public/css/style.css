@@ -525,7 +525,7 @@
   } 
 
 /*Forms*/
-  .form{    /*creates a box for the contact form*/
+  .wikiform{    /*creates a box for the contact form*/
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);   /*adds shadow around the box*/
     border-radius: 5px;   /*rounds the corner of the box*/
     background-color: #f0eeee;    /*changes the backround color*/
@@ -533,12 +533,12 @@
     font-family: Roboto;
   }
 
-  .form label{
+  .wikiform label{
     margin-bottom: 5px;
     font-family: 'Segoe UI', Tahoma, Verdana, sans-serif;
   }
 
-  .form p{
+  .wikiform p{
     margin-top: 0px;
     margin-bottom: 5px;
     padding: 10px;
@@ -548,16 +548,16 @@
     border-radius: 10px;
   }
 
-  .form fieldset {
+  .wikiform fieldset {
     border-radius: 5px;
   }
 
-  .form fieldset legend{
+  .wikiform fieldset legend{
     font-family: 'Advent Pro', sans-serif;
     font-weight: bold;
   }
 
-  .form input:not([type=submit]):not([type="radio"]),.form textarea, .form select {   /*Style rules for textarea tag and all the inputs except the submit button */
+  .wikiform input:not([type=submit]):not([type="radio"]),.wikiform textarea, .wikiform select {   /*Style rules for textarea tag and all the inputs except the submit button */
     width: 100%;    /*extends the width to the max of the form box*/
     padding: 10px 20px;   /*spacing*/
     margin: 8px 0;
@@ -566,7 +566,7 @@
     box-sizing: border-box; /*includes padding and border in the width and height*/
   }
 
-  .form input[type=submit] {    /*Style rules for the submit button*/
+  .wikiform input[type=submit] {    /*Style rules for the submit button*/
     width: 100%; /*extends the width to the max of the form box*/
     background-color:#6E62E2; /*changes backround color*/
     color: white;   /*changes font color*/
@@ -577,11 +577,11 @@
     cursor: pointer;    /*changes pointer into a pointer one*/
   }
 
-  .form input[type=submit]:hover {    /*changes buttons backround color while hovering*/
+  .wikiform input[type=submit]:hover {    /*changes buttons backround color while hovering*/
     background-color:#3a337e;
   }
 
-  .form legend {    /*spacing, changes font color of the legend tag*/
+  .wikiform legend {    /*spacing, changes font color of the legend tag*/
     color:#051014;
     padding: 5px 10px;
   }
@@ -614,6 +614,16 @@
     border-radius: 10px;
     background-color: white;
     margin: 10px;
+  }
+
+  .radios p{
+    margin-top: 0px;
+    margin-bottom: 5px;
+    padding: 10px;
+    font-family: 'Segoe UI', Tahoma, Verdana, sans-serif;
+    border-bottom: #051014 solid 1px;
+    background-color: lightgray;
+    border-radius: 10px;
   }
 /* Footer */
   footer {    /*creates the footer area*/
@@ -683,24 +693,23 @@
 
 #filter {
   float: left;
+  margin-top: 2em;
   margin-left: 10em;
-  padding: 0px 20px 20px 20px;
+  padding: 10px;
   max-width: 250px;
+  max-height: 300px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); 
   border-radius: 5px;  
-  border-style: dotted;
-  border-width: 1px;
+  height:fit-content;
 }
 
 #login {
   float: right;
+  margin-top: 2em;
   margin-right: 1em;
-  padding: 0px 20px 20px 20px;
   max-width: 250px;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); 
-  border-radius: 5px;  
-  border-style: dotted;
-  border-width: 1px;
+
+  height:fit-content;
 }
 
 #ok {
@@ -710,3 +719,44 @@
 #fail {
   color: red;
 }
+
+#top-bar {
+  background-color: #ACBDBA;
+}
+
+#top-bar {
+  padding: 10px;
+  display: inline-block;
+}
+
+#top-bar img {
+  float: right;
+}
+
+#cart {
+  float: right;
+}
+
+#cart p {
+  color: #051014;
+  font-size: larger;
+}
+
+#cart a {
+  color: #051014;
+  font-size:small;
+  text-decoration: dotted;
+}
+
+.wiki-grid {
+  display: grid;
+  grid-template-columns: auto 1f auto;
+  grid-template-rows: auto 1fr;
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+  }
+  
+  .div1 { grid-area: 1 / 1 / 2 / 4; }
+  .div2 { grid-area: 2 / 1 / 3 / 2; }
+  .div3 { grid-area: 2 / 2 / 3 / 3; }
+  .div4 { grid-area: 2 / 3 / 3 / 4; }

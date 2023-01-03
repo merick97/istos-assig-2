@@ -22,7 +22,7 @@ templates.categories = Handlebars.compile(`
     {{#each this}}
         <section id="{{{id}}}" class="category">
 			<h3>{{{title}}}</h3>
-            <a href="category.html?categoryId={{{id}}}"><img src="{{{img_url}}}" alt="{{{title}}}"></a>
+            <a href="category.html?categoryId={{{id}}}&title={{{title}}}"><img src="{{{img_url}}}" alt="{{{title}}}"></a>
 		</section>
     {{/each}}
 `);

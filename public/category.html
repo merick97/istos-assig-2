@@ -12,25 +12,32 @@
 <body>
     <div>
         <header>
-            <img style="max-width: 40%;" src="images/header.png" alt = "Header"> 			
-
+            <img style="max-width: 40%;" src="images/header.png" alt = "Header">
         </header>
         <main>
-            <div id="filter"></div>
-            <div id="login">
-                <form id="loginForm">
-                    <label for="username">Username:</label><br>
-                    <input type="text" id="username" name="username"><br>
-                    <label for="password">Password:</label><br>
-                    <input type="password" id="password" name="password"><br>
-                    <button type="submit">Login</button>
-                </form>
-                <div id="loginmessage"></div>
-            </div>
-            <div class="pageCenter">
-                <div id="output"></div>
-                <div id="subcat" class="center"></div>
-            </div>
+            <div class="wiki-grid">
+                <div class="div1" id="top-bar">
+                    <img style="width: 30px;" src="./images/cart.ico" alt="Cart">
+                    <div id="cart"></div>
+                </div>
+                <div class="div2 radios" id="filter"></div>
+                <div class="div4" id="login">
+                    <form id="loginForm" class="wikiform">
+                        <label for="username">Username:</label><br>
+                        <input type="text" id="username" name="username"><br>
+                        <label for="password">Password:</label><br>
+                        <input type="password" id="password" name="password"><br>
+                        <input type="submit" value="Login"></input>
+                        <div id="loginmessage"></div>
+                    </form>
+                </div>
+                <div class="pageCenter">
+                    <div class="div3">
+                        <h1 id="title"></h1>
+                        <div id="subcat" class="center"></div>
+                    </div>
+                </div>
+        </div>
         </main>
                 <footer>
                     <ul>
