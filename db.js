@@ -1,7 +1,7 @@
 const MongoClient = require('mongodb').MongoClient;
 
 let dbConnection
-let uri = 'mongodb+srv://nick:p3180126@cluster0.awpqdwz.mongodb.net/WikiShop?retryWrites=true&w=majority'
+let uri = 'mongodb+srv://nick:password@cluster0.awpqdwz.mongodb.net/WikiShop?retryWrites=true&w=majority'
 
 module.exports = {
     connectDb: (cb)=>{
