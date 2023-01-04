@@ -1,10 +1,11 @@
 const MongoClient = require('mongodb').MongoClient;
 
 let dbConnection
+let uri = 'mongodb+srv://nick:p3180126@cluster0.awpqdwz.mongodb.net/WikiShop?retryWrites=true&w=majority'
 
 module.exports = {
     connectDb: (cb)=>{
-        MongoClient.connect('mongodb://0.0.0.0:27017/WikiShop')
+        MongoClient.connect(uri)
         .then((client) => {
             dbConnection = client.db()
             return cb()

@@ -16,10 +16,7 @@ const { v4: uuidv4 } = require('uuid');
     db = getDb()
   })
 
-  let users = [];
-  setTimeout(()=>{
-    db.collection('users').find().forEach(user => users.push(user))
-  },300)
+
 
 
 
@@ -68,74 +65,84 @@ app.post('/login', (req, res) => {
     const { username, password } = req.body;
     
     // Check if the provided username and password match a user in the list
-    const nUser = users.find((nUser) => nUser.username == username && nUser.password == password);
-    if (nUser) {
-      let sessionId = uuidv4()
-      db.collection('users').updateOne({username: username}, {$set: {sessionId:sessionId}})
-      res.send({ success: true,
-                 message: 'Login successful!',
-                 sessionId: sessionId
-                });
-    } else {
-      res.send({ success: false, message: 'Invalid login credentials' });
+    async function logUser(username, password){
+      if (await db.collection('users').find({username:username, password:password}).hasNext()) {
+        let sessionId = uuidv4()
+        await db.collection('users').updateOne({username: username}, {$set: {sessionId:sessionId}})
+        res.status(201).send({ success: true,
+                               message: 'Login successful!',
+                               sessionId: sessionId
+                  });
+      } else {
+        res.status(403).send({ success: false, message: 'Invalid login credentials' });
+      }
     }
+    logUser(username,password)
+
   });
 
   app.post('/add', (req, res) => {
     const {product, username, sessionId} = req.body
 
-      async function addCart(product, username, sessionId){
-        if (isValidated(username,sessionId)){
-          if(await db.collection('cart').find({username:username}).hasNext()){
-              if(await db.collection('cart').find({username:username,"products.id":product.id}).hasNext()){
-                await db.collection('cart').updateOne({username:username,"products.id":product.id},{$inc: {"products.$.size":1}})
-              }else{
-                console.log("in2")
-                await db.collection('cart').updateOne({username:username}, {$push: {"products":product}})
-                await db.collection('cart').updateOne({username:username, "products.id":product.id}, {$set: {"products.$.size":1}})
-            } 
-            }else{
-              console.log("in3")
-                await db.collection('cart').insertOne({username:username, products:[]})
-                await db.collection('cart').updateOne({username:username}, {$push: {"products":product}})
-                await db.collection('cart').updateOne({username:username, "products.id":product.id}, {$set: {"products.$.size":1}})
-          } 
-          res.send({verified:true})
-        }else{
-          res.send({verified:false})
-        }
-    }
-    addCart(JSON.parse(product), username, sessionId)
+        isValidated(username,sessionId).then((valid)=>{
+          if (valid){
+            async function addCart(product, username, sessionId){
+              if(await db.collection('cart').find({username:username}).hasNext()){
+                  if(await db.collection('cart').find({username:username,"products.id":product.id}).hasNext()){
+                    await db.collection('cart').updateOne({username:username,"products.id":product.id},{$inc: {"products.$.size":1}})
+                  }else{
+                    await db.collection('cart').updateOne({username:username}, {$push: {"products":product}})
+                    await db.collection('cart').updateOne({username:username, "products.id":product.id}, {$set: {"products.$.size":1}})
+                } 
+                }else{
+                    await db.collection('cart').insertOne({username:username, products:[]})
+                    await db.collection('cart').updateOne({username:username}, {$push: {"products":product}})
+                    await db.collection('cart').updateOne({username:username, "products.id":product.id}, {$set: {"products.$.size":1}})
+              } 
+              res.status(201).send({verified:true})
+           }
+           addCart(JSON.parse(product), username, sessionId)
+          }else{
+            res.status(403).send({verified:false})
+          }
+        })
+
+    
   });
   
 app.post('/shoping-cart/size',(req,res) => {
   const {username, sessionId} = req.body
-  if(isValidated(username,sessionId)){
-    let size = 0
-    db.collection('cart').aggregate([
-      {
-         $match: { username:username }
-      },
-      {
-         $group: { _id: "$products.size"} 
+  isValidated(username,sessionId).then((valid)=>{
+    if(valid){
+      async function getSize(username){
+        let size = 0
+        await db.collection('cart').aggregate([
+          {
+             $match: { username:username }
+          },
+          {
+             $group: { _id: "$products.size"} 
+          }
+       ]).toArray((err, result)=>{
+          for(let i of result[0]._id){
+            size += i
+          }
+          res.status(201).send({size:size})
+       })
       }
-   ]).toArray((err, result)=>{
-      //console.log(result[0]._id)
-      res.send(result[0]._id)
-   })
-  }
+      getSize(username)
+    }else{res.status(403)}
+  })
 })
 
 app.post('/shoping-cart',(req,res) => {
   let totalCost  = 0;
   const {username, sessionId} = req.body
   isValidated(username,sessionId).then((valid)=>{
-    console.log(valid)
     if(valid){
       db.collection('cart').findOne({ username:username }, function(err, cart) {
         if (err) throw err;
   
-        // Create an array of objects with size and cost properties for each product in the cart
         const cartItems = cart.products.map(product => ({ title:product.title, size: product.size, cost: product.cost }));
         for(let i of cartItems){
           totalCost += i.cost;
@@ -145,10 +152,9 @@ app.post('/shoping-cart',(req,res) => {
           totalCost:totalCost
         }]
   
-        // Send the cartItems array as a response
-        res.send({ productInfo });
+        res.status(201).send({ productInfo });
       });
-    }
+    }else{res.status(403)}
   })
 
 })

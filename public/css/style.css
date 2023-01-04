@@ -31,7 +31,7 @@
     border-bottom: #051014 solid 2px;
     font-size: 30px;
     margin-top: 0px;
-    margin-bottom: 1px;
+    margin-bottom: 5px;
   }
 
 /*hr style rules*/
@@ -720,17 +720,22 @@
   color: red;
 }
 
-#top-bar {
-  background-color: #ACBDBA;
-}
 
 #top-bar {
+  background-color: #ACBDBA;
   padding: 10px;
-  display: inline-block;
+}
+
+#top-bar a, #top-bar p {
+  margin: 0px;
+  padding: 0px;
 }
 
 #top-bar img {
+  width: 40px;
   float: right;
+  margin: 0px;
+  padding: 0px;
 }
 
 #cart {
@@ -745,7 +750,19 @@
 #cart a {
   color: #051014;
   font-size:small;
-  text-decoration: dotted;
+  text-decoration:none;
+}
+
+#cart a:hover {
+  color:#3a337e;
+}
+
+#totalPrice {
+  color: #3a337e;
+  float: right;
+  font-weight: bold;
+  font-family: 'Roboto', sans-serif;
+  font-size: large;
 }
 
 .wiki-grid {

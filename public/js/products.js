@@ -232,13 +232,10 @@ async function getCartSize(username,sessionId){
     })
         .then((response) => response.json())
         .then((data) => {
-            for(let i of data){
-                size += i;
-            }
             tempInfo = [{
                 username:username,
                 sessionId:sessionId,
-                size:size
+                size:data.size
             }]
         })
         .catch((err) => {
